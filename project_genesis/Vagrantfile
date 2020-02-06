@@ -482,7 +482,16 @@ end
             :libvirt__tunnel_port => "#{ 33851 + offset }",
             :libvirt__iface_name => 'swp26',
             auto_config: false
-
+      # link for swp27 --> netq1:eth1
+      device.vm.network "private_network",
+            :mac => "44:38:39:00:00:d1",
+            :libvirt__tunnel_type => 'udp',
+            :libvirt__tunnel_local_ip => '127.0.0.1',
+            :libvirt__tunnel_local_port => "#{ 33602 + offset }",
+            :libvirt__tunnel_ip => '127.0.0.1',
+            :libvirt__tunnel_port => "#{ 33852 + offset }",
+            :libvirt__iface_name => 'swp27',
+            auto_config: false
 
 
     # Fixes "stdin: is not a tty" and "mesg: ttyname failed : Inappropriate ioctl for device"  messages --> https://github.com/mitchellh/vagrant/issues/1673
@@ -617,8 +626,11 @@ udev_rule
 echo "  INFO: Adding UDEV Rule: 44:38:39:00:00:c7 --> swp26"
 echo 'ACTION=="add", SUBSYSTEM=="net", ATTR{address}=="44:38:39:00:00:c7", NAME="swp26", SUBSYSTEMS=="pci"' >> /etc/udev/rules.d/70-persistent-net.rules
 udev_rule
-     
-      device.vm.provision :shell , :inline => <<-vagrant_interface_rule
+     device.vm.provision :shell , :inline => <<-udev_rule
+echo "  INFO: Adding UDEV Rule: 44:38:39:00:00:d1 --> swp27"
+echo 'ACTION=="add", SUBSYSTEM=="net", ATTR{address}=="44:38:39:00:00:d1", NAME="swp27", SUBSYSTEMS=="pci"' >> /etc/udev/rules.d/70-persistent-net.rules
+
+    device.vm.provision :shell , :inline => <<-vagrant_interface_rule
 echo "  INFO: Adding UDEV Rule: Vagrant interface = vagrant"
 echo 'ACTION=="add", SUBSYSTEM=="net", ATTR{ifindex}=="2", NAME="vagrant", SUBSYSTEMS=="pci"' >> /etc/udev/rules.d/70-persistent-net.rules
 echo "#### UDEV Rules (/etc/udev/rules.d/70-persistent-net.rules) ####"
