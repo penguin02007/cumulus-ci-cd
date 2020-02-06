@@ -1,0 +1,148 @@
+graph G {
+ "j2-bf81-1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bf82-1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bf83-1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bf84-1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bf87-1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bf88-1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+
+ "j2-sp001-1-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-sp001-2-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-sp001-3-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-sp001-4-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+
+ "j2-bl001-1-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bl001-2-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bl001-3-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "j2-bl001-4-lab" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+
+ "DCI" [function="host" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+
+#Firewall
+ "j2-fw001-1-lab" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+ "j2-fw001-2-lab" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+
+ "j2-fw002-1-lab" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+ "j2-fw002-2-lab" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+
+ "R1H1switch"  [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "R2H1switch"  [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "R3H1switch"  [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.7" memory="768" config="./helper_scripts/extra_switch_config.sh"]
+ "R1H1" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+ "R1H2" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+ "R1H3" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+ "R2H1" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+ "R3H1" [function="host" os="generic/ubuntu1804" memory="512" config="./helper_scripts/extra_server_config.sh"]
+
+ #"oob-mgmt-server" [function="oob-server" memory="512" mgmt_ip="100.78.255.254/24"]
+
+#Leaf to Spine connections
+ "j2-bf81-1":"swp29" -- "j2-sp001-1-lab":"swp1"
+ "j2-bf81-1":"swp30" -- "j2-sp001-2-lab":"swp1"
+ "j2-bf81-1":"swp31" -- "j2-sp001-3-lab":"swp1"
+ "j2-bf81-1":"swp32" -- "j2-sp001-4-lab":"swp1"
+
+ "j2-bf82-1":"swp29" -- "j2-sp001-1-lab":"swp2"
+ "j2-bf82-1":"swp30" -- "j2-sp001-2-lab":"swp2"
+ "j2-bf82-1":"swp31" -- "j2-sp001-3-lab":"swp2"
+ "j2-bf82-1":"swp32" -- "j2-sp001-4-lab":"swp2"
+
+ "j2-bf83-1":"swp29" -- "j2-sp001-1-lab":"swp3"
+ "j2-bf83-1":"swp30" -- "j2-sp001-2-lab":"swp3"
+ "j2-bf83-1":"swp31" -- "j2-sp001-3-lab":"swp3"
+ "j2-bf83-1":"swp32" -- "j2-sp001-4-lab":"swp3"
+
+ "j2-bf84-1":"swp29" -- "j2-sp001-1-lab":"swp4"
+ "j2-bf84-1":"swp30" -- "j2-sp001-2-lab":"swp4"
+ "j2-bf84-1":"swp31" -- "j2-sp001-3-lab":"swp4"
+ "j2-bf84-1":"swp32" -- "j2-sp001-4-lab":"swp4"
+
+ "j2-bf87-1":"swp29" -- "j2-sp001-1-lab":"swp7"
+ "j2-bf87-1":"swp30" -- "j2-sp001-2-lab":"swp7"
+ "j2-bf87-1":"swp31" -- "j2-sp001-3-lab":"swp7"
+ "j2-bf87-1":"swp32" -- "j2-sp001-4-lab":"swp7"
+
+ "j2-bf88-1":"swp29" -- "j2-sp001-1-lab":"swp8"
+ "j2-bf88-1":"swp30" -- "j2-sp001-2-lab":"swp8"
+ "j2-bf88-1":"swp31" -- "j2-sp001-3-lab":"swp8"
+ "j2-bf88-1":"swp32" -- "j2-sp001-4-lab":"swp8"
+
+#Border to Spine connections
+ "j2-sp001-1-lab":"swp29" -- "j2-bl001-1-lab":"swp1"
+ "j2-sp001-1-lab":"swp30" -- "j2-bl001-2-lab":"swp1"
+ "j2-sp001-1-lab":"swp31" -- "j2-bl001-3-lab":"swp1"
+ "j2-sp001-1-lab":"swp32" -- "j2-bl001-4-lab":"swp1"
+
+ "j2-sp001-2-lab":"swp29" -- "j2-bl001-1-lab":"swp2"
+ "j2-sp001-2-lab":"swp30" -- "j2-bl001-2-lab":"swp2"
+ "j2-sp001-2-lab":"swp31" -- "j2-bl001-3-lab":"swp2"
+ "j2-sp001-2-lab":"swp32" -- "j2-bl001-4-lab":"swp2"
+
+ "j2-sp001-3-lab":"swp29" -- "j2-bl001-1-lab":"swp3"
+ "j2-sp001-3-lab":"swp30" -- "j2-bl001-2-lab":"swp3"
+ "j2-sp001-3-lab":"swp31" -- "j2-bl001-3-lab":"swp3"
+ "j2-sp001-3-lab":"swp32" -- "j2-bl001-4-lab":"swp3"
+
+ "j2-sp001-4-lab":"swp29" -- "j2-bl001-1-lab":"swp4"
+ "j2-sp001-4-lab":"swp30" -- "j2-bl001-2-lab":"swp4"
+ "j2-sp001-4-lab":"swp31" -- "j2-bl001-3-lab":"swp4"
+ "j2-sp001-4-lab":"swp32" -- "j2-bl001-4-lab":"swp4"
+
+#DCI Private/DCI Public
+ "j2-bl001-1-lab":"swp19s0" -- "DCI":"swp1"
+ "j2-bl001-1-lab":"swp19s1" -- "DCI":"swp2"
+
+ "j2-bl001-2-lab":"swp19s0" -- "DCI":"swp3"
+ "j2-bl001-2-lab":"swp19s1" -- "DCI":"swp4"
+
+ "j2-bl001-3-lab":"swp19s0" -- "DCI":"swp5"
+ "j2-bl001-3-lab":"swp19s1" -- "DCI":"swp6"
+
+ "j2-bl001-4-lab":"swp19s0" -- "DCI":"swp7"
+ "j2-bl001-4-lab":"swp19s1" -- "DCI":"swp8"
+
+#FW CONNECTIONS
+ "j2-bf81-1":"swp25" -- "j2-fw001-1-lab":"eth1"
+ "j2-bf81-1":"swp26" -- "j2-fw001-2-lab":"eth1"
+ "j2-bf82-1":"swp25" -- "j2-fw001-1-lab":"eth2"
+ "j2-bf82-1":"swp26" -- "j2-fw001-2-lab":"eth2"
+
+ "j2-bf87-1":"swp25" -- "j2-fw002-1-lab":"eth1"
+ "j2-bf87-1":"swp26" -- "j2-fw002-2-lab":"eth1"
+ "j2-bf88-1":"swp25" -- "j2-fw002-1-lab":"eth2"
+ "j2-bf88-1":"swp26" -- "j2-fw002-2-lab":"eth2"
+
+#SERVER CONNECTIONS
+ #RACK1
+ "j2-bf81-1":"swp1s0" -- "R1H1switch":"swp31"
+ "j2-bf82-1":"swp1s0" -- "R1H1switch":"swp32"
+ "R1H1switch":"swp1" -- "R1H1":"eth1"
+ "R1H1switch":"swp2" -- "R1H1":"eth2"
+ "R1H1switch":"swp3" -- "R1H2":"eth1"
+ "R1H1switch":"swp4" -- "R1H2":"eth2"
+ "R1H1switch":"swp5" -- "R1H3":"eth1"
+ "R1H1switch":"swp6" -- "R1H3":"eth2"
+
+ #RACK2
+ "j2-bf83-1":"swp1s0" -- "R2H1switch":"swp31"
+ "j2-bf84-1":"swp1s0" -- "R2H1switch":"swp32"
+ "R2H1switch":"swp1" -- "R2H1":"eth1"
+ "R2H1switch":"swp2" -- "R2H1":"eth2"
+
+ #RACK3
+ "j2-bf87-1":"swp1s0" -- "R3H1switch":"swp31"
+ "j2-bf88-1":"swp1s0" -- "R3H1switch":"swp32"
+ "R3H1switch":"swp1" -- "R3H1":"eth1"
+ "R3H1switch":"swp2" -- "R3H1":"eth2"
+
+#MLAG CONNECTIONS
+ "j2-bf81-1":"swp27" -- "j2-bf82-1":"swp27"
+ "j2-bf81-1":"swp28" -- "j2-bf82-1":"swp28"
+
+ "j2-bf83-1":"swp27" -- "j2-bf84-1":"swp27"
+ "j2-bf83-1":"swp28" -- "j2-bf84-1":"swp28"
+
+ "j2-bf87-1":"swp27" -- "j2-bf88-1":"swp27"
+ "j2-bf87-1":"swp28" -- "j2-bf88-1":"swp28"
+
+}
