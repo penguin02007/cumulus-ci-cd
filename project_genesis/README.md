@@ -6,9 +6,24 @@ This repository consists instruction to build a Cumulus Lab on testing with NetQ
 
 ## Table of Conents
 * [Prerequisite](#rerequisite)
-  * [NetQ Install](#netq-install)
+* [Install NetQ](#install-netq)
+  * [Setup](#setup)
+    * [Networking](#networking)
+* [References](#references)
 
-## NetQ Install
+## Prerequisite
+This Lab has been tested with the following Hardware and OS:
+Intel(R) Xeon(R) CPU E5-2603 v4 @ 1.70GHz
+64GB
+Ubuntu 18.04
+Vagrant 2.2.7
+```
+apt-get install -y curl qemu-kvm libvirt-bin virtualbox qemu-kvm libvirt-bin libvirt bridge-utils
+cd /tmp && curl -O https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
+./vagrant_2.2.7_x86_64.deb
+
+```
+## Install NetQ
 ```
 virt-install --name=netq1 --vcpus=8 --memory=32768 --os-type=linux \
 --os-variant=debian7 \
@@ -18,8 +33,9 @@ virt-install --name=netq1 --vcpus=8 --memory=32768 --os-type=linux \
 --noautoconsole
 ```
 
-## Connect NetQ to oob-mgmt-switch
-To connect NetQ to the oob-mgmt-switch. A UDP unicast tunnel is required, this provides a virtual network which enables connections between QEMU instances using QEMU's UDP infrastructure.
+### Setup
+#### Networking
+For NetQ to communicate to the oob-mgmt-switch. A UDP unicast tunnel is required, this provides a virtual network which enables connections between QEMU instances using QEMU's UDP infrastructure.
 
 The xml "source" address is the endpoint address to which the UDP socket packets will be sent from the host running QEMU. The xml "local" address is the address of the interface from which the UDP socket packets will originate from the QEMU host. 
 ```
@@ -36,3 +52,6 @@ The xml "source" address is the endpoint address to which the UDP socket packets
     </interface>
 ...
 ```
+
+## References
+1. https://libvirt.org/formatdomain.html#elementsNICSUDP
