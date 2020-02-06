@@ -5,24 +5,24 @@ This repository consists instruction to build a Cumulus Lab on testing with NetQ
 ---
 
 ## Table of Conents
-* [Prerequisite](#rerequisite)
+* [Requirements](#requirements)
 * [Install NetQ](#install-netq)
-  * [Setup](#setup)
-    * [Networking](#networking)
+  * [Networking](#networking)
 * [References](#references)
 
-## Prerequisite
-This Lab has been tested with the following Hardware and OS:
-Intel(R) Xeon(R) CPU E5-2603 v4 @ 1.70GHz
-64GB
-Ubuntu 18.04
-Vagrant 2.2.7
+## Requirements
+The following are a list of recommended software, specs and hardware to run this project successfully.
+* **Ubuntu 18.04**
+* **64GB Memory**
+* **[Vagrant](https://releases.hashicorp.com/vagrant)** - This has been tested to work on 2.2.7.
+* **[Ansible](http://ansible.com)**
 ```
 apt-get install -y curl qemu-kvm libvirt-bin virtualbox qemu-kvm libvirt-bin libvirt bridge-utils
 cd /tmp && curl -O https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
 ./vagrant_2.2.7_x86_64.deb
 
 ```
+
 ## Install NetQ
 ```
 virt-install --name=netq1 --vcpus=8 --memory=32768 --os-type=linux \
