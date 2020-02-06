@@ -54,4 +54,5 @@ The xml "source" address is the endpoint address to which the UDP socket packets
 ```
 
 ## References
-1. https://libvirt.org/formatdomain.html#elementsNICSUDP
+1. [Libvirt](https://libvirt.org/formatdomain.html#elementsNICSUDP)
+2. [NetQ DeploymentGuide](https://docs.cumulusnetworks.com/cumulus-netq/Cumulus-NetQ-Deployment-Guide/Install-NetQ/Prepare-NetQ-Onprem/#kvm-single-server-deployment)
