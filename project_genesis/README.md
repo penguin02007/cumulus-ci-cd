@@ -17,7 +17,7 @@ The following are a list of recommended software, specs and hardware to run this
 * **[Vagrant](https://releases.hashicorp.com/vagrant)** - This has been tested to work on 2.2.7.
 * **[Ansible](http://ansible.com)**
 ```
-apt-get install -y curl qemu-kvm libvirt-bin virtualbox qemu-kvm libvirt-bin libvirt bridge-utils
+apt-get install -y curl qemu-kvm libvirt-bin virtualbox qemu-kvm bridge-utils
 cd /tmp && curl -O https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
 ./vagrant_2.2.7_x86_64.deb
 
