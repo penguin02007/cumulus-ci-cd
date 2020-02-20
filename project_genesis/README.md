@@ -7,7 +7,10 @@ This repository consists instruction to build a Cumulus Lab on testing with NetQ
 ## Table of Conents
 * [Requirements](#requirements)
 * [Install NetQ](#install-netq)
+  * [Verify hardware](#verify-hardware)
   * [Networking](#networking)
+    * [Configure UDP Tunnel](#configure-udp-tunnel)
+      * [netq](#netq)
 * [References](#references)
 
 ## Requirements
@@ -70,8 +73,8 @@ INFO: ALL CHECKS PASSED
 ```
 
 
-### Setup
-#### Configure UDP tunnel
+### Networking
+#### Configure UDP Tunnel
 ##### NetQ
 For NetQ to communicate to oob-mgmt-switch. A UDP unicast tunnel is required to provide a virtual network which enables connections between QEMU instances using QEMU's UDP infrastructure. (Similar to Point-to-Point)
 
