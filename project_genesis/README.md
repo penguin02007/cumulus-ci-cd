@@ -152,6 +152,20 @@ Interface:    swp27, via: LLDP, RID: 19, Time: 0 day, 00:04:14
     PortDescr:    eth1
     TTL:          120
 -------------------------------------------------------------------------------
+
+#### Install NetQ-agnet
+Put the servers in a list. Install vagrant-scp plugin, add NetQ repo and install netq-agent.
+```
+vagrant plugin in vagrant-scp
+for i in `cat servers.lst`;
+  do vagrant scp netq.yml $i:/tmp/ \
+     vagrant ssh -c 'grep netq /etc/hosts || echo "172.20.232.68 netq1.bos1.rakops.com" | sudo tee --append /etc/hosts && \
+     grep netq /etc/apt/sources.list || echo "deb http://apps3.cumulusnetworks.com/repos/deb CumulusLinux-3 netq-latest" | sudo tee --append /etc/apt/sources.list && \
+     apt-get update && apt-get install netq-agent -y && \
+     sudo mv /tmp/netq.yml /etc/netq/config.d/netq.yml && \
+     systemctl restart netq-agent' $i;
+done
+
 ```
 
 ## References
