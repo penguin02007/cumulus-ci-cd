@@ -6,7 +6,7 @@ This repository consists instruction to build a Cumulus Lab on testing with NetQ
 
 ## Table of Conents
 * [Requirements](#requirements)
-* [Install NetQ](#install-netq)
+* [Installation](#installation)
   * [Verify hardware](#verify-hardware)
   * [Networking](#networking)
     * [Configure UDP Tunnel](#configure-udp-tunnel)
@@ -17,18 +17,21 @@ This repository consists instruction to build a Cumulus Lab on testing with NetQ
 The following are a list of recommended software, specs and hardware to run this project successfully.
 * **Ubuntu 18.04**
 * **64GB Memory**
-* **[Vagrant](https://releases.hashicorp.com/vagrant)** - This has been tested to work on 2.2.7.
+* **[Vagrant](https://releases.hashicorp.com/vagrant)** - Tested to work on 2.2.7.
+* **[vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt#installation) - Tested to work on 0.0.45.
 * **[Ansible](http://ansible.com)**
 ```
-apt-get install -y curl qemu-kvm libvirt-bin virtualbox qemu-kvm bridge-utils virtinst
+apt-get install -y curl qemu-kvm libvirt-bin virtualbox qemu-kvm bridge-utils virtinst ruby-full
 cd /tmp && curl -O https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
 apt install ./vagrant_2.2.7_x86_64.deb
 
 ```
 
-## Install NetQ
+## Installation
+Deploy NetQRun NetQ Bootstrap CLI
+Run the Bootstrap CLI on the platform for the management interface.
 ```
-virt-install --name=netq1 --vcpus=8 --memory=63228 --os-type=linux \
+virt-install --name=netq1 --vcpus=8 --memory=65536 --os-type=linux \
 --os-variant=debian7 \
 --disk path=/opt/apps/downloads/netq-2.4.0-ubuntu-18.04-ts-qemu.qcow2,format=qcow2,bus=virtio,cache=none \
 --network=type=direct,source=eno1,model=virtio \
@@ -36,7 +39,23 @@ virt-install --name=netq1 --vcpus=8 --memory=63228 --os-type=linux \
 --noautoconsole
 ```
 
-### Verify hardware
+To change memory after the vm is created, it can be done with the `setmaxmem` and `setmem` argument - 
+```
+virsh dominfo netq1
+virsh shutdown netq1
+virsh setmaxmem netq1 68GB --config
+virsh setmem netq1 68GB --live
+virsh start netq1
+```
+
+Run the following command on the NetQ server.
+```
+netq bootstrap reset (If failed)
+netq bootstrap master interface eth0 tarball /mnt/installables/netq-bootstrap-2.4.0.tgz # proxy-host http://pkg.proxy.prod.jp.local proxy-port 10080
+netq install standalone full interface eth0 bundle /mnt/installables/NetQ-2.4.1.tgz
+```
+
+### Verify Hardware
 ```
 oot@netq1:~# opta-check
 
@@ -74,9 +93,8 @@ INFO: ALL CHECKS PASSED
 
 
 ### Networking
-#### Configure UDP Tunnel
-##### NetQ
-For NetQ to communicate to oob-mgmt-switch. A UDP unicast tunnel is required to provide a virtual network which enables connections between QEMU instances using QEMU's UDP infrastructure. (Similar to Point-to-Point)
+#### Configure UDP Tunnel on NetQ
+A UDP unicast tunnel is required to enables connections between QEMU instances and NetQ using QEMU's UDP infrastructure.
 
 ```
 virsh dumpxml netq1 > /tmp/netq1.xml
