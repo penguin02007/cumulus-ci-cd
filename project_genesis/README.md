@@ -10,7 +10,8 @@ This repository consists instruction to build a Cumulus Lab on testing with NetQ
   * [Verify hardware](#verify-hardware)
   * [Networking](#networking)
     * [Configure UDP Tunnel](#configure-udp-tunnel)
-      * [netq](#netq)
+    * [Verify UDP Tunnel](#verify-udp-tunnel)
+  [Setup Demo](#setup-demo)
 * [References](#references)
 
 ## Requirements
@@ -39,7 +40,7 @@ virt-install --name=netq1 --vcpus=8 --memory=65536 --os-type=linux \
 --noautoconsole
 ```
 
-To change memory after the vm is created, it can be done with the `setmaxmem` and `setmem` argument - 
+To change memory after the vm is created, it can be done with the `setmaxmem` and `setmem` argument:
 ```
 virsh dominfo netq1
 virsh shutdown netq1
@@ -93,7 +94,7 @@ INFO: ALL CHECKS PASSED
 
 
 ### Networking
-#### Configure UDP Tunnel on NetQ
+#### Configure UDP Tunnel
 A UDP unicast tunnel is required to enables connections between QEMU instances and NetQ using QEMU's UDP infrastructure.
 
 ```
@@ -121,9 +122,8 @@ virsh shutdown netq1 && virsh start netq1
 ```
 
 #### Verify UDP tunnel
-##### NetQ
 
-Add interfaces in netplan then restart netplan.
+In Netq, add interfaces in netplan block configuration and restart netplan.
 ```
 cat /etc/netplan/01-eth0.yaml
 network:
@@ -148,7 +148,7 @@ Verify eth1 is up. It should receive address from oob-mgmt-switch
        valid_lft forever preferred_lft forever
 ```
 
-##### oob-mgmt-switch
+On management switch - 
 ```
 root@oob-mgmt-switch:~# net sho lldp swp27
 -------------------------------------------------------------------------------
@@ -171,7 +171,7 @@ Interface:    swp27, via: LLDP, RID: 19, Time: 0 day, 00:04:14
     TTL:          120
 -------------------------------------------------------------------------------
 
-#### Install NetQ-agnet
+#### Install NetQ Agnets
 Put the servers in a list. Install vagrant-scp plugin, add NetQ repo and install netq-agent.
 ```
 vagrant plugin in vagrant-scp
